@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  </head>
+
+  <body>
+    <h1>Calcule o custo do transporte</h1>
+
+    <form action="/calculo" method="post">
+      <p>
+        Distância Pavimentada:
+        <input
+          type="text"
+          id="distanciaPavimentada"
+          name="distanciaPavimentada"
+        />
+      </p>
+      <p>
+        Distância Não Pavimentada:
+        <input
+          type="text"
+          id="distanciaNaoPavimentada"
+          name="distanciaNaoPavimentada"
+        />
+      </p>
+      <p>
+        Selecione um veículo:
+        <select name="idVeiculo">
+          <option value="1">Caminhão Baú</option>
+          <option value="2">Caminhão Caçamba</option>
+          <option value="3">Carreta</option>
+        </select>
+      </p>
+      <p>Carga: <input type="text" name="carga" id="carga" /></p>
+      <p>
+        <input type="submit" value="Submit" />
+        <input type="reset" value="Reset" />
+      </p>
+    </form>
+
+    <script src="js/imask.js"></script>
+    <script type="text/javascript">
+      document.addEventListener("DOMContentLoaded", function(event) {
+        var distanciaPavimentada = document.getElementById(
+          "distanciaPavimentada"
+        );
+        var distanciaNaoPaviamentada = document.getElementById(
+          "distanciaNaoPavimentada"
+        );
+        var carga = document.getElementById("carga");
+
+        var maskOption = {
+          mask: Number, // enable number mask
+          // other options are optional with defaults below
+          scale: 2, // digits after point, 0 for integers
+          signed: false, // disallow negative
+          thousandsSeparator: "", // any single char
+          padFractionalZeros: false, // if true, then pads zeros at end to the length of scale
+          normalizeZeros: true, // appends or removes zeros at ends
+          radix: ".", // fractional delimiter
+          mapToRadix: ["."],
+          min: 0
+        };
+
+        var cargaMask = new IMask(carga, maskOption);
+        var distanciaPavimentadaMask = new IMask(
+          distanciaPavimentada,
+          maskOption
+        );
+        
+        var distanciaNaoPaviamentadaMask = new IMask(
+          distanciaNaoPaviamentada,
+          maskOption
+        );
+      });
+    </script>
+  </body>
+</html>
